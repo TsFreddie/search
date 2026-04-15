@@ -8,14 +8,12 @@
     "build": "bun build src/index.ts --outfile=dist/index.js --target=node",
     "prepublishOnly": "bun run build"
   },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "prettier": "^3.8.3"
-  },
   "peerDependencies": {
     "typescript": "^5.9.3"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.8.3",
     "cheerio": "^1.2.0",
     "pureimage": "^0.4.18"
   },
