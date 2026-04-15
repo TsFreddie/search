@@ -8,6 +8,7 @@ function printHelp() {
        search --next
 
 Options:
+  -h, --help         Show this help message
   --region <name>    Search region (default: global)
   --date <frame>     Date frame: any, past_day, past_week, past_month, past_year
 
@@ -20,6 +21,10 @@ Examples:
   search --date past_week javascript news
   search --region us_english --date past_month rust
   search --solve 1 3 5 7`);
+}
+
+function isUnrecognizedOption(arg: string): boolean {
+  return arg.startsWith("-") && !["-h", "--help", "--region", "--date", "--solve", "--next"].some((opt) => arg === opt || arg.startsWith(`${opt}=`));
 }
 
 async function main() {
@@ -49,16 +54,27 @@ async function main() {
   let region: string | undefined;
   let dateFrame: string | undefined;
   const positional: string[] = [];
+  let unrecognizedOption: string | undefined;
 
   for (let i = 0; i < args.length; i++) {
-    const arg = args[i];
+    const arg = args[i]!;
+    if (isUnrecognizedOption(arg)) {
+      unrecognizedOption = arg;
+      break;
+    }
     if (arg === "--region" && i + 1 < args.length) {
       region = args[++i]!;
     } else if (arg === "--date" && i + 1 < args.length) {
       dateFrame = args[++i]!;
     } else {
-      positional.push(arg!);
+      positional.push(arg);
     }
+  }
+
+  if (unrecognizedOption) {
+    console.error(`error: unrecognized option '${unrecognizedOption}'`);
+    console.error("Try 'search --help' for more information.");
+    process.exit(1);
   }
 
   const query = positional.join(" ");

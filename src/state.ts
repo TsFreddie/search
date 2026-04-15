@@ -1,12 +1,12 @@
-import { writeFile, readFile, rm } from "fs/promises";
-import { existsSync } from "fs";
+import { writeFile, readFile, rm, mkdir } from "fs/promises";
 import { STATE_FILE, CAPTCHA_IMAGES_DIR } from "./types";
 import type { CaptchaState } from "./types";
+import { existsSync } from "fs";
 
 export async function saveState(state: CaptchaState): Promise<void> {
   try {
     // ensure dir exists
-    await writeFile(CAPTCHA_IMAGES_DIR, "").catch(() => {});
+    await mkdir(CAPTCHA_IMAGES_DIR, { recursive: true }).catch(() => {});
     await writeFile(STATE_FILE, JSON.stringify(state));
   } catch (e) {
     console.error("Failed to save state:", e);
