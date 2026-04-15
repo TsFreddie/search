@@ -1,0 +1,36 @@
+{
+  "name": "@tsfreddie/search",
+  "version": "1.0.1",
+  "description": "A CLI search tool using DuckDuckGo Lite",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "bun build src/index.ts --outfile=dist/index.js --target=node",
+    "prepublishOnly": "bun run build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.8.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "pureimage": "^0.4.18"
+  },
+  "files": [
+    "dist",
+    "assets"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsfreddie/search"
+  },
+  "bin": {
+    "search": "./dist/index.js"
+  }
+}
