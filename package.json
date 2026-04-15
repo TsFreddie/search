@@ -1,11 +1,11 @@
 {
   "name": "@tsfreddie/search",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A CLI search tool using DuckDuckGo Lite",
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "build": "bun build src/index.ts --outfile=dist/index.js --target=node",
+    "build": "bun build src/index.ts --outfile=dist/index.js --target=node --banner='#!/usr/bin/env node'",
     "prepublishOnly": "bun run build"
   },
   "peerDependencies": {
