@@ -3,13 +3,14 @@ import * as pureimage from "pureimage";
 import { Readable, PassThrough } from "stream";
 import { writeFile, readFile } from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
 import { CAPTCHA_IMAGES_DIR, defaultHeaders } from "./types";
 import type { CaptchaState } from "./types";
 import { fetchImage } from "./fetch";
 
 export async function loadOverlay() {
-  // Use process.cwd() to get project root (where assets folder is)
-  const overlayPath = path.join(process.cwd(), "assets", "captcha-overlay.png");
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  const overlayPath = path.join(__dirname, "..", "assets", "captcha-overlay.png");
   const file = await readFile(overlayPath);
   const readable = new Readable();
   readable.push(file);

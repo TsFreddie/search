@@ -38,10 +38,10 @@ search --next
 
 ### CAPTCHA
 
-If a CAPTCHA is required, the tool will display a composite image. Open it, identify the squares containing ducks, then solve:
+If a CAPTCHA is required, the tool will present a challenge and save a captcha image. To solve the CAPTCHA, use:
 
 ```bash
-search --solve 1 3 5 7
+search --solve 1 3 5
 ```
 
 ## Build

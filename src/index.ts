@@ -19,12 +19,16 @@ Examples:
   search typescript tutorial
   search --region japan react hooks
   search --date past_week javascript news
-  search --region us_english --date past_month rust
-  search --solve 1 3 5 7`);
+  search --region us_english --date past_month rust`);
 }
 
 function isUnrecognizedOption(arg: string): boolean {
-  return arg.startsWith("-") && !["-h", "--help", "--region", "--date", "--solve", "--next"].some((opt) => arg === opt || arg.startsWith(`${opt}=`));
+  return (
+    arg.startsWith("-") &&
+    !["-h", "--help", "--region", "--date", "--solve", "--next"].some(
+      (opt) => arg === opt || arg.startsWith(`${opt}=`),
+    )
+  );
 }
 
 async function main() {
@@ -36,7 +40,10 @@ async function main() {
   }
 
   if (args[0] === "--solve") {
-    const indices = args.slice(1).map(Number).filter((n) => !isNaN(n) && n >= 1 && n <= 9);
+    const indices = args
+      .slice(1)
+      .map(Number)
+      .filter((n) => !isNaN(n) && n >= 1 && n <= 9);
     if (indices.length === 0) {
       console.error("Please provide indices (1-9).");
       process.exit(1);
